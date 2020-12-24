@@ -30,11 +30,9 @@
         <pre style="background-color: #000; color: #fff;" class="code-font"><?= htmlspecialchars($output); ?></pre>
         <?php endif; ?>
         <hr />
-        <a href="https://github.com/parsampsh/pashmak" target="_blank">Github</a>
+        <a href="https://github.com/pashmaklang/pashmak" target="_blank">Github</a>
         &nbsp;&nbsp;&nbsp;
-        <a href="https://github.com/parsampsh/pashmak/blob/master/README.md#documentation" target="_blank">Pashmak Documentation</a>
-        <br />
-        <span style="color: gray;">sorry for website bullshit design, i'm not designer</span>
+        <a href="https://github.com/pashmaklang/pashmak/blob/master/README.md#documentation" target="_blank">Pashmak Documentation</a>
     </div>
     <br /><br /><br />
 </body>
