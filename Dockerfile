@@ -6,7 +6,7 @@ RUN pip3 install pyinstaller
 # compile program
 RUN mkdir /tmp/pashmak-src
 WORKDIR /tmp/pashmak-src
-RUN git clone https://github.com/parsampsh/pashmak.git src
+RUN git clone https://github.com/pashmaklang/pashmak.git src
 WORKDIR /tmp/pashmak-src/src
 RUN git branch installation $(git describe --abbrev=0)
 RUN git checkout installation
