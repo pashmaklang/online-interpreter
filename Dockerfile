@@ -9,12 +9,13 @@ WORKDIR /tmp/pashmak-src
 RUN git clone https://github.com/pashmaklang/pashmak.git src
 WORKDIR /tmp/pashmak-src/src
 RUN git branch installation $(git describe --abbrev=0)
+RUN echo installing version $(git describe --abbrev=0)
 RUN git checkout installation
 RUN make all
 RUN make
 RUN cp ./dist/pashmak /pashmak
 
-FROM php:7.4-apache-buster
+FROM php:8.0-apache-buster
 
 # add a user for runtime
 RUN echo Y | adduser runner
