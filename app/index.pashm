@@ -1,0 +1,64 @@
+#!/bin/pashmak
+
+import @pit, @os, @web
+
+# init the web
+web.init()
+web.end_headers()
+
+func run_code(string $code, string $stdin)
+    # Run code
+
+    # write code to a temp file
+    $tmp_path = '/tmp/temp-script-' + str(time.time()) + str(random.random()) + '.pashm'
+    $tmp_path_stdin = $tmp_path + '.stdin'
+    $tmp_path_output = $tmp_path + '.output'
+    $f = fopen($tmp_path, 'w')
+    $f->write($code)
+    $f->close()
+
+    # write recived stdin to tempfile
+    $f = fopen($tmp_path_stdin, 'w')
+    $f->write($stdin)
+    $f->close()
+
+    # run code with `runner` user and put output to temp file
+    $cmd = 'cat ' + $tmp_path_stdin + ' | timeout 20s pashmak ' + $tmp_path + ' > ' + $tmp_path_output
+    system($cmd)
+
+    # read output
+    $output_f = fopen($tmp_path_output, 'r')
+    $output = $output_f->read()
+    $output_f->close()
+
+    # remove temp files
+    os.remove($tmp_path)
+    os.remove($tmp_path_stdin)
+
+    return $output
+endfunc
+
+# check form submited
+$code = ''
+$stdin = ''
+if $os.env['REQUEST_METHOD'] == 'POST'
+    $code = $web.post['code'];
+    if 'stdin' in list($web.post->keys())
+        $stdin = $web.post['stdin'];
+    else
+        $stdin = '';
+    endif
+endif
+
+# if any code submited, run this and show output
+$output = null
+if $code != ''
+    $output = run_code($code, $stdin)
+endif
+
+# show view
+println pit.run_file($__dir__ + '/view.pashm.html', false, htmldata={
+    'output': $output,
+    'code': $code,
+    'stdin': $stdin
+})

@@ -15,7 +15,8 @@ RUN make all
 RUN make
 RUN cp ./dist/pashmak /pashmak
 
-FROM php:8.0-apache-buster
+# TODO : change image to apache
+FROM php:7.4-apache-buster
 
 # add a user for runtime
 RUN echo Y | adduser runner
@@ -27,8 +28,13 @@ RUN chmod +x /bin/pashmak
 # config apache
 RUN echo 'export APACHE_RUN_USER=runner' >> /etc/apache2/envvars
 RUN echo 'export APACHE_RUN_GROUP=runner' >> /etc/apache2/envvars
+RUN echo '<Directory "/var/www">' >> /etc/apache2/sites-enabled/000-default.conf
+RUN echo '  AllowOverride All' >> /etc/apache2/sites-enabled/000-default.conf
+RUN echo '</Directory>' >> /etc/apache2/sites-enabled/000-default.conf
+RUN a2enmod cgi
 
 # copy src
 COPY ./app /var/www/html
-RUN chown -R root:root /var/www
-RUN chmod -R ga-w /var/www
+RUN chown -R www-data:www-data /var/www
+RUN chmod -R a-w /var/www
+RUN chmod -R a+rx /var/www

@@ -7,9 +7,8 @@ Try it in https://pashmak-parsampsh.fandogh.cloud
 to run it by yourself, you can use docker:
 
 ```bash
-docker build -t pashmak .
-docker run --rm -p 8000:80 pashmak
+docker build -t pashmak_oi .
+docker run --rm -p 8000:80 pashmak_oi
 ```
 
-now, you can use it in http://localhost:8000
-
+now, you can use it in http://localhost:8000.

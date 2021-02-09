@@ -1,0 +1,3 @@
+AddHandler cgi-script .pashm .pashm.html .pit
+Options +ExecCGI
+DirectoryIndex index.pashm

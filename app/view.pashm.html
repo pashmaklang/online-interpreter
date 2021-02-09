@@ -1,3 +1,14 @@
+#!/bin/pashmak @pit
+{
+func html_special_chars(string $text)
+    # TODO : complete this function
+    return $text
+endfunc
+
+$code = html_special_chars($htmldata['code'])
+$stdin = html_special_chars($htmldata['stdin'])
+$htmldata['output'] = html_special_chars($htmldata['output'])
+}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,29 +17,29 @@
     <title>Pashmak Programming Language Online Interpreter</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <style>
-    body{
+    body\{
         background-color: #222;
         color: #eee;
-    }
-    .code-font{
+    \}
+    .code-font\{
         font-family: "Consolas", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New";
-    }
-    .code-font::selection{
+    \}
+    .code-font::selection\{
         background-color: rgba(40,60,255,0.5);
-    }
+    \}
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Pashmak Programming Language Online Interpreter</h1>
         <form method="POST" class="form-group">
-            <textarea style="background-color: #555; color: #eee; min-height: 300px;" class="form-control code-font" placeholder="write your code..." name="code"><?= htmlspecialchars($code) ?></textarea>
-            <textarea style="background-color: #555; color: #eee; min-height: 100px;" class="form-control" placeholder="program stdin inputs" name="stdin"><?= htmlspecialchars($stdin) ?></textarea>
+            <textarea style="background-color: #555; color: #eee; min-height: 300px;" class="form-control code-font" placeholder="write your code..." name="code">{= $code }</textarea>
+            <textarea style="background-color: #555; color: #eee; min-height: 100px;" class="form-control" placeholder="program stdin inputs" name="stdin">{= $stdin }</textarea>
             <input class="btn btn-dark" style="width: 100%; margin-top: 10px;" type="submit" value="run" />
         </form>
-        <?php if($output !== null): ?>
-        <pre style="background-color: #000; color: #fff;" class="code-font"><?= htmlspecialchars($output); ?></pre>
-        <?php endif; ?>
+        { if $htmldata['output'] != null }
+        <pre style="background-color: #000; color: rgb(228, 226, 226);" class="code-font">{= $htmldata['output'] }</pre>
+        { endif }
         <hr />
         <a href="https://github.com/pashmaklang/pashmak" target="_blank">Github</a>
         &nbsp;&nbsp;&nbsp;
