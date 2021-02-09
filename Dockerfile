@@ -15,7 +15,6 @@ RUN make all
 RUN make
 RUN cp ./dist/pashmak /pashmak
 
-# TODO : change image to apache
 FROM php:7.4-apache-buster
 
 # add a user for runtime
