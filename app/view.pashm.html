@@ -1,8 +1,10 @@
 #!/bin/pashmak @pit
 {
 func html_special_chars(string $text)
-    # TODO : complete this function
-    return $text
+    if typeof($text) == string
+        return py_load_module('html')->escape($text)
+    endif
+    return ''
 endfunc
 
 $code = html_special_chars($htmldata['code'])
@@ -37,7 +39,7 @@ $htmldata['output'] = html_special_chars($htmldata['output'])
             <textarea style="background-color: #555; color: #eee; min-height: 100px;" class="form-control" placeholder="program stdin inputs" name="stdin">{= $stdin }</textarea>
             <input class="btn btn-dark" style="width: 100%; margin-top: 10px;" type="submit" value="run" />
         </form>
-        { if $htmldata['output'] != null }
+        { if $htmldata['output'] != null and $htmldata['output'] != '' }
         <pre style="background-color: #000; color: rgb(228, 226, 226);" class="code-font">{= $htmldata['output'] }</pre>
         { endif }
         <hr />
